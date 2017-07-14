@@ -8,9 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @SpringBootApplication
-public class ConfigurationParameters {
+public class ConfigurationParametersCampanha {
 	public static void main(String[] args) {
-		SpringApplication.run(ConfigurationParameters.class, args);
+		System.getProperties().put("server.port", 8081);
+		SpringApplication.run(ConfigurationParametersCampanha.class, args);
 	}
 	
 	@Bean

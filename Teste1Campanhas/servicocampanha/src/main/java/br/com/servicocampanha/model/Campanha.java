@@ -6,10 +6,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity(name="campanha")
-@NamedQuery(name="campanha.findByDataVigencia", query="SELECT c FROM campanha c WHERE c.dataVigencia <= :dataVigencia")
+@NamedQueries({
+	@NamedQuery(name="campanha.findAll",
+				query="SELECT c FROM campanha c WHERE c.dataVigencia > now()"),
+	@NamedQuery(name="campanha.findByDataVigencia", 
+				query="SELECT c FROM campanha c WHERE c.dataVigencia <= :dataVigencia AND c.dataVigencia > now()"),
+	@NamedQuery(name="campanha.findByTime", 
+				query="SELECT c FROM campanha c WHERE c.idTimeCoracao <= :idTimeCoracao AND c.dataVigencia > now()")})
 public class Campanha {
 	
 	public Campanha() {

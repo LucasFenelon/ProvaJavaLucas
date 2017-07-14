@@ -15,7 +15,7 @@ public class CampanhaTest {
 	@Test
 	public void validaRetornoListaCampanha(){
 		RestTemplate restTemplate = new RestTemplate();
-		String result = restTemplate.getForObject("http://localhost:8080/campanha", String.class);
+		String result = restTemplate.getForObject("http://localhost:8081/campanha", String.class);
 		
 		System.out.println(result);
 	}
@@ -26,7 +26,7 @@ public class CampanhaTest {
 		Map<String, String> params = new HashMap<String, String>();
 	    
 		params.put("id", "4");
-		restTemplate.delete("http://localhost:8080/campanha/{id}", params);
+		restTemplate.delete("http://localhost:8081/campanha/{id}", params);
 		System.out.println(restTemplate.toString());
 	}
 	
@@ -35,7 +35,7 @@ public class CampanhaTest {
 		RestTemplate restTemplate = new RestTemplate();
 
 		Campanha campanha = new Campanha(String.format("testeCampanha_%s", Math.random()), new Long(2), new Date(new java.util.Date().getTime()));
-		restTemplate.postForEntity("http://localhost:8080/campanha", campanha, String.class);		
+		restTemplate.postForEntity("http://localhost:8081/campanha", campanha, String.class);		
 		System.out.println(restTemplate.toString());
 	}
 }

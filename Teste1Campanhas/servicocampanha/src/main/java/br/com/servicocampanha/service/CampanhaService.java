@@ -7,40 +7,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.servicocampanha.model.Campanha;
-import br.com.servicocampanha.repository.CampanhaRepository;
+import br.com.servicocampanha.repository.CampanhaVigenciaRepository;
 
 @Service
 public class CampanhaService {
 	
 	@Autowired
-	private CampanhaRepository campanhaRepository;
+	private CampanhaVigenciaRepository campanhaVigenciaRepository;
 		
 	public Iterable<Campanha> listaCampanha(){
-		return campanhaRepository.findAll();
+		return campanhaVigenciaRepository.findAll();
 	}
 	
 	public Campanha getCampanha(Long id){
-		return campanhaRepository.findOne(id);
+		return campanhaVigenciaRepository.findOne(id);
 	}
 	
 	public Iterable<Campanha> salvaCampanha(Campanha campanha){
-		List<Campanha> campanhas = campanhaRepository.findByDataVigencia(campanha.getDataVigencia());
+		List<Campanha> campanhas = campanhaVigenciaRepository.findByDataVigencia(campanha.getDataVigencia());
 		
 		if(campanhas.size() > 0){
 			campanhas.stream().forEach(camp -> adicionaDiasVigenciaCampanha(camp, campanhas.size() - campanhas.indexOf(camp)));
-			campanhaRepository.save(campanhas);
+			campanhaVigenciaRepository.save(campanhas);
 		}
 		
-		campanhaRepository.save(campanha);		
-		return campanhaRepository.findAll();
+		campanhaVigenciaRepository.save(campanha);		
+		return campanhaVigenciaRepository.findAll();
 	}
 	
 	public Iterable<Campanha> removeCampanha(Long id){
 		if(getCampanha(id) != null){
-			campanhaRepository.delete(id);
+			campanhaVigenciaRepository.delete(id);
 		}
 		
-		return campanhaRepository.findAll();
+		return campanhaVigenciaRepository.findAll();
 	}
 	
 	private void adicionaDiasVigenciaCampanha(Campanha campanha, int diasAMais){
